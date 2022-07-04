@@ -5,19 +5,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
+    <script src="playaudio.js" defer></script>
 </head>
 
 <body>
     <h1>Constant Audio Reminder Tool</h1>
     <h2>Settings</h2>
     <h3>Interval between pings</h3>
-    <input type="number" id="ping-interval">
-    <select id="time-unit">
-        <option value="seconds">seconds</option>
-        <option value="minutes">minutes</option>
-        <option value="hours">hours</option>
-    </select>
+    <form name="interval-settings" action="" method="GET">
+        <input type="number" id="ping-interval">
+        <select id="time-unit">
+            <option value="seconds">seconds</option>
+            <option value="minutes">minutes</option>
+            <option value="hours">hours</option>
+        </select>
+    </form>
+    
     <br>
     <br>
     <button id="start-button">Start timer</button>
