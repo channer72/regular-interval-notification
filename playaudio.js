@@ -2,22 +2,31 @@ var ping = new Audio("sounds/chime1.mp3");
 var pingInterval;
 var timeUnit;
 
-document.getElementById("start-button").addEventListener("click", startTimer)
+document.getElementById("start-button").addEventListener("click", timer)
 
-function startTimer() {
+function timer() {
+    timerInit();
+    setInterval(playSound, pingInterval);
+
+}
+
+function timerInit() {
     pingInterval = document.getElementById("ping-interval").value;
     timeUnit = document.getElementById("time-unit").value;
-    if (timeUnit === "minutes"){
-        pingInterval *= 60;
+    if (timeUnit === "seconds"){
+        pingInterval *= 1000;
+    }
+    else if (timeUnit === "minutes"){
+        pingInterval *= 1000*60;
     }
     else if (timeUnit === "hours"){
-        pingInterval *= 60*60;
+        pingInterval *= 1000*60*24;
     }
-
-    ping.play();
+    // console.log(pingInterval);
 }
 
 function playSound() {
+    ping.load();
     ping.play();
 }
 
