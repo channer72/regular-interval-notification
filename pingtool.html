@@ -14,17 +14,19 @@
     <h1>Constant Audio Reminder Tool</h1>
     <h2>Settings</h2>
     <h3>Interval between pings</h3>
-    <input type="number" id="ping-interval" value="20">
+    <input type="number" id="ping-interval" value="2">
     <select id="time-unit">
-        <option value="seconds">seconds</option>
-        <option value="minutes">minutes</option>
-        <option value="hours">hours</option>
+        <option value="seconds">second(s)</option>
+        <option value="minutes">minute(s)</option>
+        <option value="hours">hour(s)</option>
     </select>
     
     <br>
     <br>
 
     <button id="start-button">Start timer</button>
+    <br>
+    <p id="iteration-countdown"></p>
 
     <h2>How does this work?</h2>
     <p>This tool sends out an audio ping at regular intervals of your choice. It is designed to serve as a repeating reminder or timer for a task.</p>
