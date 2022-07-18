@@ -3,6 +3,7 @@ const second = 1000;
 var ping = new Audio("sounds/chime1.mp3");
 var pingInterval;
 var timeUnit;
+var timerInterval;
 var timerCount = 0;
 
 var secondsLeft = 0;
@@ -10,12 +11,20 @@ var minutesLeft = 0;
 var hoursLeft = 0;
 
 document.getElementById("start-button").addEventListener("click", timer);
+document.getElementById("reset-button").addEventListener("click", resetTimer);
 
 function timer() {
     console.log("start!");
     timerInit();
-    setInterval(timerIteration, second);
+    timerInterval = setInterval(timerIteration, second);
+    document.getElementById("start-button").disabled = true;
+}
 
+function resetTimer(){
+    console.log("stopped!");
+    document.getElementById("start-button").disabled = false;
+    clearInterval(timerInterval);
+    document.getElementById("iteration-countdown").innerHTML = 'N/A';
 }
 
 function timerInit() {
@@ -53,13 +62,11 @@ function playSound() {
 function countdownToNext(){
     formatCountdownTime();
     
-    // adding a 0 to start of value if <10
     const countdownTimer = `${hoursLeft}: ${minutesLeft}: ${secondsLeft}`
-    console.log(hoursLeft);
-    console.log(minutesLeft);
-    console.log(secondsLeft);
+    // console.log(hoursLeft);
+    // console.log(minutesLeft);
+    // console.log(secondsLeft);
 
-    // current line to fix: figure out how to make element show timer
     document.getElementById("iteration-countdown").innerHTML = countdownTimer;
 }
 
