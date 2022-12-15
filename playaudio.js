@@ -1,14 +1,14 @@
 const second = 1000;
 
 var ping = new Audio("sounds/chime1.mp3");
-var pingInterval;
+var pingInterval; // time between pings in sec
 var timeUnit;
 var timerInterval;
-var timerCount = 0;
+var timerCount = 0; // time elapsed in sec
 
-var secondsLeft = 0;
-var minutesLeft = 0;
-var hoursLeft = 0;
+var secondsDisplay = 0;
+var minutesDisplay = 0;
+var hoursDisplay = 0;
 
 document.getElementById("start-button").addEventListener("click", timer);
 document.getElementById("reset-button").addEventListener("click", resetTimer);
@@ -30,14 +30,11 @@ function resetTimer(){
 function timerInit() {
     pingInterval = document.getElementById("ping-interval").value;
     timeUnit = document.getElementById("time-unit").value;
-    if (timeUnit === "seconds"){
-        pingInterval *= 1000;
-    }
-    else if (timeUnit === "minutes"){
-        pingInterval *= 1000*60;
+    if (timeUnit === "minutes"){
+        pingInterval *= 60;
     }
     else if (timeUnit === "hours"){
-        pingInterval *= 1000*60*24;
+        pingInterval *= 60*24;
     }
     // console.log(pingInterval);
 }
@@ -45,7 +42,7 @@ function timerInit() {
 function timerIteration() {
     timerCount++;
     countdownToNext();
-    console.log(timerCount * 1000, pingInterval);
+    console.log("timerCount :", timerCount, "||| pingInterval: ", pingInterval);
     if (timerCount * 1000 - pingInterval === 0){
         console.log("reset");
         playSound();
@@ -62,7 +59,7 @@ function playSound() {
 function countdownToNext(){
     formatCountdownTime();
     
-    const countdownTimer = `${hoursLeft}: ${minutesLeft}: ${secondsLeft}`
+    const countdownTimer = `${hoursDisplay}: ${minutesDisplay}: ${secondsDisplay}`
     // console.log(hoursLeft);
     // console.log(minutesLeft);
     // console.log(secondsLeft);
@@ -72,18 +69,21 @@ function countdownToNext(){
 
 /* separating countdown timer into hours, minutes and seconds */
 function formatCountdownTime(){
-    hoursLeft = Math.floor(timerCount / (60 * 24));
-    minutesLeft = Math.floor(timerCount / 60);
-    secondsLeft = timerCount % 60;
+    
+    timeLeft = pingInterval - timerCount
+    console.log("timeLeft:", timeLeft)
+    secondsDisplay = timeLeft % 60;
+    minutesDisplay = Math.floor(timeLeft / 60);
+    hoursDisplay = Math.floor(timeLeft / (60 * 24));
 
-    if (hoursLeft < 10){
-        hoursLeft = '0' + hoursLeft;
+    if (hoursDisplay < 10){
+        hoursDisplay = '0' + hoursDisplay;
     }
-    if (minutesLeft < 10){
-        minutesLeft = '0' + minutesLeft;
+    if (minutesDisplay < 10){
+        minutesDisplay = '0' + minutesDisplay;
     }
-    if (secondsLeft < 10){
-        secondsLeft = '0' + secondsLeft;
+    if (secondsDisplay < 10){
+        secondsDisplay = '0' + secondsDisplay;
     }
 
 }
