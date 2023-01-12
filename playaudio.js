@@ -2,9 +2,9 @@ const second = 1000;
 
 var ping = new Audio("sounds/chime1.mp3");
 var pingInterval; // time between pings in sec
-var timeUnit;
-var timerInterval;
-var timerCount = 0; // time elapsed in sec
+var timeUnit; // unit of time the timer is in ('seconds', 'minutes' or 'hours')
+var timerInterval; // interval iteration object
+var timerCount = 0; // time elapsed since last ping in sec
 
 var secondsDisplay = 0;
 var minutesDisplay = 0;
@@ -23,6 +23,7 @@ function timer() {
 function resetTimer(){
     console.log("stopped!");
     document.getElementById("start-button").disabled = false;
+    timerCount = 0
     clearInterval(timerInterval);
     document.getElementById("iteration-countdown").innerHTML = 'N/A';
 }
@@ -43,7 +44,7 @@ function timerIteration() {
     timerCount++;
     countdownToNext();
     console.log("timerCount :", timerCount, "||| pingInterval: ", pingInterval);
-    if (timerCount * 1000 - pingInterval === 0){
+    if (timerCount - pingInterval === 0){
         console.log("reset");
         playSound();
         timerCount = 0;
