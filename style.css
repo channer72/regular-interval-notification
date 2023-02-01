@@ -4,8 +4,27 @@ h1 {
 
 h1, h2, h3, h4, h5, h6 {
     font-family: Nunito;
+    text-align: center;
 }
 
 p {
     font-family: "PT Sans";
+}
+
+.timer {
+    text-align: center;
+    font-size: 20vh;
+    width: 100%;
+}
+
+.ping-interval {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    text-align: center;
+}
+
+.ping-interval .column {
+    flex: 33.33%;
 }

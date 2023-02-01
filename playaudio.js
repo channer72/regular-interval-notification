@@ -25,30 +25,35 @@ function resetTimer(){
     document.getElementById("start-button").disabled = false;
     timerCount = 0
     clearInterval(timerInterval);
-    document.getElementById("iteration-countdown").innerHTML = 'N/A';
+    document.getElementById("iteration-countdown").innerHTML = ' ';
 }
 
 function timerInit() {
-    pingInterval = document.getElementById("ping-interval").value;
-    timeUnit = document.getElementById("time-unit").value;
-    if (timeUnit === "minutes"){
-        pingInterval *= 60;
-    }
-    else if (timeUnit === "hours"){
-        pingInterval *= 60*24;
-    }
-    // console.log(pingInterval);
+    let hours = parseInt(document.getElementById("ping-interval-hours").value * 60*24);
+    let minutes = parseInt(document.getElementById("ping-interval-minutes").value * 60);
+    let seconds = parseInt(document.getElementById("ping-interval-seconds").value);
+
+    console.log(hours);
+    console.log(minutes);
+    console.log(seconds);
+
+    pingInterval = hours + minutes + seconds;
+    console.log(pingInterval);
 }
 
 function timerIteration() {
+    if (timerCount === 0){
+        playSound();
+    }
     timerCount++;
     countdownToNext();
     console.log("timerCount :", timerCount, "||| pingInterval: ", pingInterval);
+    
     if (timerCount - pingInterval === 0){
         console.log("reset");
-        playSound();
         timerCount = 0;
     }
+    
 }
 
 
@@ -71,7 +76,7 @@ function countdownToNext(){
 /* separating countdown timer into hours, minutes and seconds */
 function formatCountdownTime(){
     
-    timeLeft = pingInterval - timerCount
+    timeLeft = pingInterval - timerCount + 1
     console.log("timeLeft:", timeLeft)
     secondsDisplay = timeLeft % 60;
     minutesDisplay = Math.floor(timeLeft / 60);
